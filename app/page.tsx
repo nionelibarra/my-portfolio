@@ -8,7 +8,7 @@ import { FavoriteProjects } from './components/FavoriteProjects';
 import { Footer } from './components/Footer';
 
 async function getHomePageData(): Promise<HomePageData> {
-  const query = `*[_type == "home"][0] | order(_createdAt desc){
+  const query = `*[_type == "home"][0]{
     header,
       subheader,
       "techstackUrls": techstack[].asset->url,
