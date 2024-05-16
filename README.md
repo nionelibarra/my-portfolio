@@ -1,4 +1,4 @@
-Last Left Off [Youtube With Time stamp](https://youtu.be/PkffpzERpKs?t=3251)
+Last Left Off [Youtube With Time stamp](https://youtu.be/PkffpzERpKs?t=5808)
 
 Run the development server:
 
