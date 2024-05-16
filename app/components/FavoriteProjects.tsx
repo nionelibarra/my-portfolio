@@ -12,7 +12,7 @@ async function getData() {
           "imageUrl":image.asset->url
       }`;
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {}, { next: { revalidate: 10 } });//allows us to revalidate the page every 10 seconds to get the latest data  from sanity studio
   return data;
 }
 

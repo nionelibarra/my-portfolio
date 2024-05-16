@@ -8,7 +8,7 @@ import { FavoriteProjects } from './components/FavoriteProjects';
 import { Footer } from './components/Footer';
 
 async function getHomePageData(): Promise<HomePageData> {
-  const query = `*[_type == "home"][0]{
+  const query = `*[_type == "home"][0] | order(_createdAt desc){
     header,
       subheader,
       "techstackUrls": techstack[].asset->url,
@@ -22,7 +22,7 @@ async function getHomePageData(): Promise<HomePageData> {
         aboutmeheader,
       aboutmesubheader,
 }`;
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {}, { next: { revalidate: 10 } }); //allows us to revalidate the page every 10 seconds to get the latest data  from sanity studio
   revalidatePath('/');
   return data;
 }

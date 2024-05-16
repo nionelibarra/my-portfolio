@@ -13,7 +13,7 @@ async function getData() {
       "imageUrl":image.asset->url
   }`;
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {}, { next: { revalidate: 10 } });//allows us to revalidate the page every 10 seconds to get the latest data  from sanity studio
   return data;
 }
 
@@ -50,7 +50,12 @@ export default async function ProjectsPage() {
               </p>
               <div className='mt-3 flex flex-wrap gap-2 font-semibold'>
                 {item.tags.map((tagItem, index) => (
-                  <span className='inline-flex items-center rounded-md bg-primary/10 px-3 py-1.5 text-xs sm:text-sm font-bold text-primary ring-2 rinng-inset ring-primary/20' key={index}>{tagItem}</span>
+                  <span
+                    className='inline-flex items-center rounded-md bg-primary/10 px-3 py-1.5 text-xs sm:text-sm font-bold text-primary ring-2 rinng-inset ring-primary/20'
+                    key={index}
+                  >
+                    {tagItem}
+                  </span>
                 ))}
               </div>
             </div>
