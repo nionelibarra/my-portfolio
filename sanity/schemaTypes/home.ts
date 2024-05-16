@@ -6,6 +6,16 @@ export const homeType = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'profilepic',
+      title: 'Profile Picture',
+      type: 'image',
+    }),
+    defineField({
+      name: 'profilepictwo',
+      title: 'Second Row Profile Picture',
+      type: 'image',
+    }),
+    defineField({
       name: 'header',
       title: 'Main Header',
       type: 'string',

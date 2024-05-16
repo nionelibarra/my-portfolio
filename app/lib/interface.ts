@@ -21,4 +21,6 @@ export interface HomePageData {
   socialmediaaccounts:SocialMediaAccount[];
   aboutmeheader:string[];
   aboutmesubheader:string[];
+  profilepic:string;
+  profilepictwo:string;
 }

@@ -28,7 +28,7 @@ export function AboutSection({ data }: { data: HomePageData }) {
       </Card>
       <div className='col-span-1'>
         <Image
-          src={me}
+          src={data.profilepictwo ?? me}
           alt='Neyo Ibarra'
           className='h-[500px] object-cover rounded-lg w-full'
         />

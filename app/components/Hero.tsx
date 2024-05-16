@@ -30,7 +30,7 @@ export default function Hero({ data }: { data: HomePageData }) {
         </a>
       </div>
       <Image
-        src={me}
+        src={data.profilepic ?? me}
         alt='Neyo Ibarra'
         className='col-span-1 h-[500px] object-cover rounded-2xl bg-gray-100'
         priority
