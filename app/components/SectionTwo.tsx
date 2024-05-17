@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { HomePageData } from '../lib/interface';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 export async function SectionTwo({ data }: { data: HomePageData }) {
@@ -61,7 +60,7 @@ export async function SectionTwo({ data }: { data: HomePageData }) {
               <p className='text-muted-foreground'>{item.username}</p>
 
               <Button className='mt-4' size='sm' asChild>
-                <a href={item.url}>
+                <a href={item.url} target='_blank' rel='noopener noreferrer'>
                   Follow
                 </a>
               </Button>

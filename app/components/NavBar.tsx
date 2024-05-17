@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MobileMenu } from './MobileMenu';
+import { ContactMeForm } from './ContactMeForm';
 
 export const navigationItems = [
   {
@@ -33,7 +34,7 @@ export function NavBar() {
     <nav className='max-w-7xl mx-auto px-4 md:px-8 py-5 grid grid-cols-12'>
       <div className='col-span-6 flex md:col-span-3'>
         <Link href={'/'}>
-          <h1 className='text-3xl font-bold'>
+          <h1 className='text-4xl font-bold'>
             Neyo <span className='text-blue-500'>Ibarra</span>
           </h1>
         </Link>
@@ -57,7 +58,7 @@ export function NavBar() {
         </NavigationMenu>
       </div>
       <div className='flex items-center justify-end md:col-span-3 col-span-6'>
-        <Button className='hidden sm:flex' asChild><a href="mailto:nionelibarra@gmail.com">Contact Me</a></Button>
+        <ContactMeForm buttonText='👉 Contact Me!' buttonSelect='primary'/>
         <div className='sm:hidden'>
           <MobileMenu />
         </div>

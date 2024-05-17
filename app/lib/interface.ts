@@ -24,3 +24,9 @@ export interface HomePageData {
   profilepic:string;
   profilepictwo:string;
 }
+
+export interface ContactFormEmailProps
+{
+  message:string;
+  senderEmail:string;
+}

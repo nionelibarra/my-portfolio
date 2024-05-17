@@ -19,3 +19,4 @@ Technologies Used:
 - [Kinde](https://kinde.com) (Authentication for Guestbook)
 - [ShadCN (UI)](https://ui.shadcn.com/docs/components/sheet)
 - [Prisma](https://www.prisma.io)
+- [React Email](https://react.email) 
