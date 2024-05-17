@@ -26,7 +26,7 @@ export function ContactMeForm({
   buttonText,
   buttonSelect,
 }: ContactMeFormProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
