@@ -113,7 +113,7 @@ export function ContactMeForm({
             <DialogTitle> 🎉 Message Sent!</DialogTitle>
           </DialogHeader>
           <DialogDescription>
-            Thanks reaching out! I'll be replying soon 😉
+            Thanks reaching out! I&apos;ll be replying soon 😉
           </DialogDescription>
           <DialogFooter className='sm:justify-start mt-4'>
             <DialogClose asChild>
