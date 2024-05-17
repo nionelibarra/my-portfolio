@@ -20,3 +20,4 @@ Technologies Used:
 - [ShadCN (UI)](https://ui.shadcn.com/docs/components/sheet)
 - [Prisma](https://www.prisma.io)
 - [React Email](https://react.email) 
+- [React Confetti](https://www.npmjs.com/package/react-confetti)

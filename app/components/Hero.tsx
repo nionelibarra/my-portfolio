@@ -8,7 +8,7 @@ import { Cursor, useTypewriter } from 'react-simple-typewriter'
 
 
 export default function Hero({ data }: { data: HomePageData }) {
-  const [typewriterText,count]=useTypewriter({
+  const [typewriterText]=useTypewriter({
     words: ['Welcome to my portfolio!',data.subheader],
     loop:true,
     delaySpeed:500,

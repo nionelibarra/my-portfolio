@@ -16,6 +16,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { sendEmail } from '../api/sendEmail';
 import { useState } from 'react';
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
 
 interface ContactMeFormProps {
   buttonText: string;
@@ -28,6 +30,7 @@ export function ContactMeForm({
 }: ContactMeFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const { width, height } = useWindowSize();
 
   const handleSubmit = async (formData: FormData) => {
     await sendEmail(formData);
@@ -57,9 +60,12 @@ export function ContactMeForm({
         </DialogTrigger>
         <DialogContent className='sm:max-w-md'>
           <DialogHeader>
-            <DialogTitle> 📮 Hit me up!</DialogTitle>
-            <DialogDescription>
-              Have an inquiry or need me for hire? Feel free to reach out!
+            <DialogTitle className='text-3xl mb-2 md:text-center'>
+              {' '}
+              📮 Hit me up!
+            </DialogTitle>
+            <DialogDescription className='text-md text-center'>
+              🤝Have an inquiry or need me for hire? Feel free to reach out!
             </DialogDescription>
           </DialogHeader>
           <form
@@ -100,7 +106,7 @@ export function ContactMeForm({
                 </Button>
               </DialogClose>
               <Button type='submit' variant='default'>
-                Send Message
+                Send (if you dare..) ✔️
               </Button>
             </DialogFooter>
           </form>
@@ -110,22 +116,27 @@ export function ContactMeForm({
       <Dialog open={isConfirmationOpen} onOpenChange={setIsConfirmationOpen}>
         <DialogContent className='sm:max-w-md'>
           <DialogHeader>
-            <DialogTitle> 🎉 Message Sent!</DialogTitle>
+            <DialogTitle className='text-4xl text-center'>
+              {' '}
+              🎉 Message Sent!
+            </DialogTitle>
           </DialogHeader>
-          <DialogDescription>
-            Thanks reaching out! I&apos;ll be replying soon 😉
+          <DialogDescription className='text-center text-md'>
+            Thanks for reaching out! I&apos;ll be replying soon 😉
           </DialogDescription>
           <DialogFooter className='sm:justify-start mt-4'>
             <DialogClose asChild>
               <Button
                 onClick={() => setIsConfirmationOpen(false)}
                 variant='default'
+                className='w-full'
               >
                 Close
               </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
+        {isConfirmationOpen && <Confetti width={width} height={height} />}
       </Dialog>
     </>
   );
