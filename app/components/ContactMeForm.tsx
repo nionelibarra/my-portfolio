@@ -106,7 +106,7 @@ export function ContactMeForm({
                 </Button>
               </DialogClose>
               <Button type='submit' variant='default'>
-                Send (if you dare..) ✔️
+                Send ✔️
               </Button>
             </DialogFooter>
           </form>

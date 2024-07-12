@@ -20,6 +20,8 @@
     "@react-email/components": "^0.0.17",
     "@react-email/render": "^0.0.13",
     "@react-email/tailwind": "^0.0.16",
+    "@react-three/drei": "^9.105.6",
+    "@react-three/fiber": "^8.16.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.378.0",

@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MobileMenu } from './MobileMenu';
 import { ContactMeForm } from './ContactMeForm';
+import { Download } from 'lucide-react';
 
 export const navigationItems = [
   {
@@ -27,6 +28,15 @@ export const navigationItems = [
     href: '/projects',
   },
 ];
+
+const handleDownload = () => {
+  const link = document.createElement('a');
+  link.href = '/my_resume.pdf'; // Replace with the actual path to your PDF file
+  link.download = 'nionel_resume.pdf'; // The name of the file to be downloaded
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
 export function NavBar() {
   const pathname = usePathname();
@@ -57,8 +67,15 @@ export function NavBar() {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <div className='flex items-center justify-end md:col-span-3 col-span-6'>
-        <ContactMeForm buttonText='👉 Contact Me!' buttonSelect='primary'/>
+      <div className='flex items-center justify-end md:col-span-3 col-span-6 space-x-3'>
+        <Button
+          onClick={handleDownload}
+          className='items-center justify-center border-blue-700 text-blue-700'
+          variant={'outline'}
+        >
+          📝 Download Resume
+        </Button>
+        <ContactMeForm buttonText='👉 Contact Me!' buttonSelect='primary' />
         <div className='sm:hidden'>
           <MobileMenu />
         </div>

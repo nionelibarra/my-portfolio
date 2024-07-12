@@ -6,6 +6,7 @@ import { client } from './lib/sanity';
 import { AboutSection } from './components/AboutSection';
 import { FavoriteProjects } from './components/FavoriteProjects';
 import { Footer } from './components/Footer';
+import CarModelViewer from './components/CarModelViewer';
 
 async function getHomePageData(): Promise<HomePageData> {
   const query = `*[_type == "home"][0]{
@@ -35,6 +36,7 @@ export default async function Home() {
       <Hero data={data} />
       <SectionTwo data={data} />
       <AboutSection data={data} />
+      {/* <CarModelViewer/> */}
       <FavoriteProjects />
       <Footer />
     </div>
