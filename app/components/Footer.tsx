@@ -16,7 +16,7 @@ export function Footer() {
         ))}
       </ul>
       <p className='mt-2 text-center text-muted-foreground'>
-        &copy; 2024 Nionel Ibarra. All Rights reserved
+        &copy; 2025 Nionel Ibarra. All Rights reserved
       </p>
     </footer>
   );
