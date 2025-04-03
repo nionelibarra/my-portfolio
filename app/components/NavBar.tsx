@@ -76,7 +76,7 @@ export function NavBar() {
           📝 Download Resume
         </Button>
         <ContactMeForm buttonText='👉 Contact Me!' buttonSelect='primary' />
-        <div className='sm:hidden'>
+        <div className='xl:hidden'>
           <MobileMenu />
         </div>
       </div>
