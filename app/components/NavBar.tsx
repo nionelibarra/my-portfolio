@@ -19,17 +19,17 @@ export const navigationItems = [
     name: 'Home',
     href: '/',
   },
-  {
-    name: 'Guestbook',
-    href: '/guestbook',
-  },
+  // {
+  //   name: 'Guestbook',
+  //   href: '/guestbook',
+  // },
   {
     name: 'Projects',
     href: '/projects',
   },
 ];
 
-const handleDownload = () => {
+export const handleDownload = () => {
   const link = document.createElement('a');
   link.href = '/my_resume.pdf'; // Replace with the actual path to your PDF file
   link.download = 'nionel_resume.pdf'; // The name of the file to be downloaded
@@ -70,7 +70,7 @@ export function NavBar() {
       <div className='flex items-center justify-end md:col-span-3 col-span-6 space-x-3'>
         <Button
           onClick={handleDownload}
-          className='items-center justify-center border-blue-700 text-blue-700'
+          className='items-center justify-center border-blue-700 text-blue-700 hidden xl:block'
           variant={'outline'}
         >
           📝 Download Resume

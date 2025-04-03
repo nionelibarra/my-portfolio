@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
-import { navigationItems } from './NavBar';
+import { handleDownload, navigationItems } from './NavBar';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
@@ -30,7 +30,7 @@ export function MobileMenu() {
         </Button>
       </SheetTrigger>
       <SheetContent>
-        <div className='mt-5 flex px-2 space-y-1 flex-col'>
+        <div className='mt-5 flex px-2 space-y-2 flex-col'>
           {navigationItems.map((item, index) => (
             <Link
               key={index}
@@ -45,6 +45,13 @@ export function MobileMenu() {
               {item.name}
             </Link>
           ))}
+          <Button
+            onClick={handleDownload}
+            className='w-full items-center justify-center border-blue-700 text-blue-700 xl:block'
+            variant={'outline'}
+          >
+            📝 Download Resume
+          </Button>
         </div>
         <SheetFooter className='mt-5'>
           <SheetClose asChild>

@@ -105,8 +105,8 @@ export function ContactMeForm({
                   Close
                 </Button>
               </DialogClose>
-              <Button type='submit' variant='default'>
-                Send ✔️
+              <Button type='submit' variant='default' className='bg-green-700'>
+                Send
               </Button>
             </DialogFooter>
           </form>

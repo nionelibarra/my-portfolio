@@ -37,7 +37,7 @@ export async function FavoriteProjects() {
                 src={item.imageUrl}
                 alt='img-description'
                 fill
-                className='object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
+                className='group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
               ></Image>
             </div>
             <div className='mt-4'>

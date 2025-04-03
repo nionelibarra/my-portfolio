@@ -13,7 +13,7 @@ async function getData() {
       "imageUrl":image.asset->url
   }`;
 
-  const data = await client.fetch(query, {}, { next: { revalidate: 10 } });//allows us to revalidate the page every 10 seconds to get the latest data  from sanity studio
+  const data = await client.fetch(query, {}, { next: { revalidate: 10 } }); //allows us to revalidate the page every 10 seconds to get the latest data  from sanity studio
   return data;
 }
 
@@ -38,7 +38,7 @@ export default async function ProjectsPage() {
                 src={item.imageUrl}
                 alt='img-description'
                 fill
-                className='object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
+                className='group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
               ></Image>
             </div>
             <div className='mt-4'>
