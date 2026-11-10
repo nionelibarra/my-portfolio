@@ -114,7 +114,7 @@ export default async function CompanyPage() {
             className='w-full max-w-xs sm:max-w-md md:max-w-xl h-auto'
           />
 
-          <p className='mt-10 text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-primary'>
+          <p className='mt-10 text-xs md:text-sm font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase text-primary text-center pl-[0.2em] md:pl-[0.4em]'>
             Hardware. Software. Intelligence.
           </p>
 

@@ -308,6 +308,7 @@ export function CinematicFooter({
 }) {
   const [qrOpen, setQrOpen] = useState(false);
   const [qrLoaded, setQrLoaded] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const giantTextRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -377,6 +378,13 @@ export function CinematicFooter({
       ctx.revert();
     };
   },[]);
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 400);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -473,15 +481,17 @@ export function CinematicFooter({
         </footer>
       </div>
 
-      {/* Floating scroll-up assist - stacked above Lets Talk */}
-      <MagneticButton
-        as="button"
-        onClick={scrollToTop}
-        aria-label="Scroll back to top"
-        className="footer-glass-pill fixed bottom-[4.75rem] right-5 md:bottom-[6rem] md:right-8 z-40 w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground opacity-80 hover:opacity-100 transition-opacity"
-      >
-        <ArrowUp className="w-5 h-5" />
-      </MagneticButton>
+      {/* Floating scroll-up assist - only visible after scrolling down */}
+      {showScrollTop && (
+        <MagneticButton
+          as="button"
+          onClick={scrollToTop}
+          aria-label="Scroll back to top"
+          className="footer-glass-pill fixed bottom-[4.75rem] right-5 md:bottom-[6rem] md:right-8 z-40 w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground opacity-80 hover:opacity-100 transition-opacity"
+        >
+          <ArrowUp className="w-5 h-5 animate-bounce" />
+        </MagneticButton>
+      )}
 
       {/* Floating Lets Talk CTA - always reachable, slightly transparent */}
       <MagneticButton
