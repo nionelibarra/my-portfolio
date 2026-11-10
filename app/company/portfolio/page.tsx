@@ -6,6 +6,7 @@ import { ProjectsCard, SocialMediaAccount } from '../../lib/interface';
 import { client } from '../../lib/sanity';
 import { CinematicFooter } from '@/components/ui/motion-footer';
 import { BackgroundPaths } from '@/components/ui/background-paths';
+import { SlideIn } from '@/components/ui/slide-in';
 
 export const metadata: Metadata = {
   title: 'Company Portfolio | That1 Tech',
@@ -47,22 +48,28 @@ export default async function CompanyPortfolioPage() {
       <BackgroundPaths />
       <main className='relative z-10 w-full min-h-screen bg-background/70 border-b border-border shadow-md rounded-b-3xl'>
         <section className='max-w-7xl w-full px-4 md:px-8 mx-auto pt-10 md:pt-20 pb-12'>
-          <Link
-            href='/company'
-            className='inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors mb-8'
-          >
-            <ArrowLeft className='w-4 h-4' />
-            Back to Company
-          </Link>
-          <h1 className='text-4xl font-bold lg:text-5xl'>Company Portfolio</h1>
-          <p className='leading-7 text-muted-foreground mt-2'>
-            Solutions we&apos;ve engineered for our clients
-          </p>
+          <SlideIn from='up'>
+            <Link
+              href='/company'
+              className='inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors mb-8'
+            >
+              <ArrowLeft className='w-4 h-4' />
+              Back to Company
+            </Link>
+            <h1 className='text-4xl font-bold lg:text-5xl'>Company Portfolio</h1>
+            <p className='leading-7 text-muted-foreground mt-2'>
+              Solutions we&apos;ve engineered for our clients
+            </p>
+          </SlideIn>
           <div className='py-12 grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 grid-cols-1'>
-            {data.map((item) => (
+            {data.map((item, index) => (
+              <SlideIn
+                key={item._id}
+                from={index % 2 === 0 ? 'left' : 'right'}
+                delay={index * 0.1}
+              >
               <a
                 href={item.link}
-                key={item._id}
                 className='group block'
                 target='_blank'
               >
@@ -94,6 +101,7 @@ export default async function CompanyPortfolioPage() {
                   </div>
                 </div>
               </a>
+              </SlideIn>
             ))}
           </div>
         </section>

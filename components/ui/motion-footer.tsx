@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUp, Check, Copy, Loader2, Mail, MessageCircle, Phone, User } from "lucide-react";
+import { ArrowUp, Briefcase, Check, Copy, Loader2, Mail, MessageCircle, Phone, User } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -148,6 +148,36 @@ const STYLES = `
 .footer-cta-primary:hover {
   filter: brightness(1.15);
   border-color: color-mix(in oklch, var(--primary) 80%, var(--foreground));
+}
+
+/* Breathing CTA - glowing border pulse */
+@keyframes footer-cta-breathe {
+  0%, 100% {
+    box-shadow:
+      0 0 20px -5px color-mix(in oklch, var(--primary) 45%, transparent),
+      inset 0 1px 1px color-mix(in oklch, var(--background) 30%, transparent);
+    border-color: color-mix(in oklch, var(--primary) 45%, var(--foreground));
+  }
+  50% {
+    box-shadow:
+      0 0 50px 0px color-mix(in oklch, var(--primary) 80%, transparent),
+      inset 0 1px 1px color-mix(in oklch, var(--background) 30%, transparent);
+    border-color: color-mix(in oklch, var(--primary) 90%, var(--foreground));
+  }
+}
+
+.footer-cta-breathe {
+  background: linear-gradient(145deg, color-mix(in oklch, var(--primary) 80%, var(--foreground)) 0%, var(--primary) 100%);
+  color: var(--primary-foreground);
+  border: 2px solid color-mix(in oklch, var(--primary) 45%, var(--foreground));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: footer-cta-breathe 3s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-cta-breathe:hover {
+  filter: brightness(1.15);
 }
 
 /* Metallic Text Glow */
@@ -444,13 +474,11 @@ export function CinematicFooter({
                 <span className="text-primary">but what you need.</span>
               </p>
 
-              {/* Secondary Text Links */}
-              <div className="flex flex-wrap justify-center gap-3 md:gap-6 w-full mt-2">
-                <MagneticButton as="a" href="/company/portfolio" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
-                  Projects
-                </MagneticButton>
-                <MagneticButton as="button" onClick={() => setQrOpen(true)} className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
-                  Contact
+              {/* Secondary CTA */}
+              <div className="flex flex-wrap justify-center gap-4 w-full mt-2">
+                <MagneticButton as="a" href="/company/portfolio" className="footer-cta-breathe px-10 py-5 rounded-full font-extrabold text-base md:text-lg flex items-center gap-3 group">
+                  <Briefcase className="w-6 h-6 opacity-80 group-hover:opacity-100 transition-opacity" />
+                  Projects we&apos;ve worked on
                 </MagneticButton>
               </div>
             </div>

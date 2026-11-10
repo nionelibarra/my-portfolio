@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { CinematicFooter } from '@/components/ui/motion-footer';
 import { BackgroundPaths } from '@/components/ui/background-paths';
+import { SlideIn } from '@/components/ui/slide-in';
 import { client } from '../lib/sanity';
 import { SocialMediaAccount } from '../lib/interface';
 
@@ -105,41 +106,51 @@ export default async function CompanyPage() {
         <section className='min-h-screen flex flex-col items-center justify-center px-6 relative'>
           <div className='absolute inset-0 bg-[radial-gradient(circle_at_top_center,color-mix(in_oklch,var(--primary)_8%,transparent)_0%,transparent_60%)] pointer-events-none' />
 
-          <Image
-            src='/company-logo-white.png'
-            alt='That1 Tech Company'
-            width={2172}
-            height={724}
-            priority
-            className='w-full max-w-xs sm:max-w-md md:max-w-xl h-auto'
-          />
+          <SlideIn from='fade' className='flex justify-center'>
+            <Image
+              src='/company-logo-white.png'
+              alt='That1 Tech Company'
+              width={2172}
+              height={724}
+              priority
+              className='w-full max-w-xs sm:max-w-md md:max-w-xl h-auto'
+            />
+          </SlideIn>
 
-          <p className='mt-10 text-xs md:text-sm font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase text-primary text-center pl-[0.2em] md:pl-[0.4em]'>
-            Hardware. Software. Intelligence.
-          </p>
+          <SlideIn from='up' delay={0.1} className='flex justify-center'>
+            <p className='mt-10 text-xs md:text-sm font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase text-primary text-center pl-[0.2em] md:pl-[0.4em]'>
+              Hardware. Software. Intelligence.
+            </p>
+          </SlideIn>
 
-          <h1 className='mt-4 text-4xl md:text-6xl font-black tracking-tight text-center'>
-            We Turn Ideas Into Technology.
-          </h1>
+          <SlideIn from='up' delay={0.2}>
+            <h1 className='mt-4 text-4xl md:text-6xl font-black tracking-tight text-center'>
+              We Turn Ideas Into Technology.
+            </h1>
+          </SlideIn>
 
-          <p className='mt-6 max-w-2xl text-center text-muted-foreground text-lg md:text-xl leading-relaxed'>
-            From hardware and connected devices to mobile apps, intelligent
-            software, and AI-powered automation — we engineer solutions that
-            bring ideas to life.
-          </p>
+          <SlideIn from='up' delay={0.3}>
+            <p className='mt-6 max-w-2xl text-center text-muted-foreground text-lg md:text-xl leading-relaxed'>
+              From hardware and connected devices to mobile apps, intelligent
+              software, and AI-powered automation — we engineer solutions that
+              bring ideas to life.
+            </p>
+          </SlideIn>
 
-          <div className='mt-8 flex flex-wrap justify-center gap-3'>
-            {['Hardware & IoT', 'Web & Mobile Apps', 'AI Solutions', 'Automation'].map(
-              (chip) => (
-                <span
-                  key={chip}
-                  className='rounded-full border border-border bg-secondary/40 px-5 py-2 text-xs md:text-sm font-semibold tracking-wide'
-                >
-                  {chip}
-                </span>
-              )
-            )}
-          </div>
+          <SlideIn from='up' delay={0.4} className='flex justify-center'>
+            <div className='mt-8 flex flex-wrap justify-center gap-3'>
+              {['Hardware & IoT', 'Web & Mobile Apps', 'AI Solutions', 'Automation'].map(
+                (chip) => (
+                  <span
+                    key={chip}
+                    className='rounded-full border border-border bg-secondary/40 px-5 py-2 text-xs md:text-sm font-semibold tracking-wide'
+                  >
+                    {chip}
+                  </span>
+                )
+              )}
+            </div>
+          </SlideIn>
 
           <div className='mt-16 flex flex-col items-center gap-2 text-muted-foreground'>
             <span className='text-xs font-semibold tracking-[0.3em] uppercase'>
@@ -164,22 +175,29 @@ export default async function CompanyPage() {
 
         {/* CAPABILITIES — four pillars */}
         <section className='max-w-7xl w-full mx-auto px-6 py-24'>
-          <p className='text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-primary text-center'>
-            Capabilities
-          </p>
-          <h2 className='mt-4 text-3xl md:text-5xl font-black tracking-tight text-center'>
-            End-to-End Technology Engineering
-          </h2>
-          <p className='mt-4 text-center text-muted-foreground text-lg max-w-2xl mx-auto'>
-            One technology partner — from physical hardware to intelligent
-            applications.
-          </p>
+          <SlideIn from='up'>
+            <p className='text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-primary text-center'>
+              Capabilities
+            </p>
+            <h2 className='mt-4 text-3xl md:text-5xl font-black tracking-tight text-center'>
+              End-to-End Technology Engineering
+            </h2>
+            <p className='mt-4 text-center text-muted-foreground text-lg max-w-2xl mx-auto'>
+              One technology partner — from physical hardware to intelligent
+              applications.
+            </p>
+          </SlideIn>
 
           <div className='mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-            {pillars.map((pillar) => (
-              <div
+            {pillars.map((pillar, index) => (
+              <SlideIn
                 key={pillar.number}
-                className='rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm p-6 flex flex-col'
+                from={index % 2 === 0 ? 'left' : 'right'}
+                delay={index * 0.1}
+                className='h-full'
+              >
+              <div
+                className='rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm p-6 flex flex-col h-full'
               >
                 <div className='flex items-center justify-between'>
                   <pillar.icon className='w-8 h-8 text-primary' />
@@ -202,40 +220,48 @@ export default async function CompanyPage() {
                   ))}
                 </ul>
               </div>
+              </SlideIn>
             ))}
           </div>
         </section>
 
         {/* ONE INTEGRATED SOLUTION — capability flow */}
         <section className='max-w-7xl w-full mx-auto px-6 pb-28'>
-          <h2 className='text-3xl md:text-5xl font-black tracking-tight text-center'>
-            One Integrated Technology Solution.
-          </h2>
-          <p className='mt-4 text-center text-muted-foreground text-lg max-w-3xl mx-auto'>
-            We don&apos;t just build websites, apps, or hardware independently —
-            we combine them into complete solutions.
-          </p>
+          <SlideIn from='up'>
+            <h2 className='text-3xl md:text-5xl font-black tracking-tight text-center'>
+              One Integrated Technology Solution.
+            </h2>
+            <p className='mt-4 text-center text-muted-foreground text-lg max-w-3xl mx-auto'>
+              We don&apos;t just build websites, apps, or hardware independently —
+              we combine them into complete solutions.
+            </p>
+          </SlideIn>
 
           <div className='mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
             {flowSteps.map((step, index) => (
-              <div
+              <SlideIn
                 key={step.title}
-                className='flex flex-col lg:flex-row items-center gap-4'
+                from={index % 2 === 0 ? 'left' : 'right'}
+                delay={index * 0.1}
+                className='h-full'
               >
-                <div className='rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm p-6 flex-1 w-full text-center'>
-                  <h3 className='text-xl font-bold'>{step.title}</h3>
-                  <p className='mt-2 text-sm text-muted-foreground'>
-                    {step.description}
-                  </p>
+                <div className='flex flex-col lg:flex-row items-center gap-4 h-full'>
+                  <div className='rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm p-6 flex-1 w-full text-center'>
+                    <h3 className='text-xl font-bold'>{step.title}</h3>
+                    <p className='mt-2 text-sm text-muted-foreground'>
+                      {step.description}
+                    </p>
+                  </div>
+                  {index < flowSteps.length - 1 && (
+                    <ArrowRight className='w-6 h-6 shrink-0 rotate-90 lg:rotate-0 text-primary' />
+                  )}
                 </div>
-                {index < flowSteps.length - 1 && (
-                  <ArrowRight className='w-6 h-6 shrink-0 rotate-90 lg:rotate-0 text-primary' />
-                )}
-              </div>
+              </SlideIn>
             ))}
           </div>
 
-          <p className='mt-14 text-center text-muted-foreground text-lg max-w-3xl mx-auto'>
+          <SlideIn from='up' delay={0.2}>
+            <p className='mt-14 text-center text-muted-foreground text-lg max-w-3xl mx-auto'>
             A smart inventory monitor? We build the{' '}
             <span className='text-foreground font-semibold'>device and sensors</span>,{' '}
             the <span className='text-foreground font-semibold'>embedded software</span>,{' '}
@@ -243,7 +269,8 @@ export default async function CompanyPage() {
             the <span className='text-foreground font-semibold'>dashboard and mobile app</span>,{' '}
             and the <span className='text-foreground font-semibold'>AI-powered analytics</span>{' '}
             — end to end.
-          </p>
+            </p>
+          </SlideIn>
         </section>
       </main>
 
