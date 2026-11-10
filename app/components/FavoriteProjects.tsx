@@ -26,7 +26,7 @@ export async function FavoriteProjects() {
       <h1 className='text-4xl md:text-4xl font-medium mt-20 w-full'>
         My Favorite Projects
       </h1>
-      <div className='py-12 grid md:grid-cols-2 gap -4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1'>
+      <div className='py-12 grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 grid-cols-1'>
         {data.map((item) => (
           <a
             href={item.link}
@@ -34,12 +34,13 @@ export async function FavoriteProjects() {
             className='group block'
             target='_blank'
           >
-            <div className='aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl relative'>
+            <div className='aspect-16/12 overflow-hidden rounded-2xl relative'>
               <Image
                 src={item.imageUrl}
                 alt='img-description'
                 fill
-                className='group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
+                sizes='(max-width: 768px) 100vw, 50vw'
+                className='object-contain p-6 group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
               ></Image>
             </div>
             <div className='mt-4'>

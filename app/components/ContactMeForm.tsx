@@ -12,9 +12,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
-import { sendEmail } from '../api/sendEmail';
+// import { Textarea } from '@/components/ui/textarea';
+// import { Input } from '@/components/ui/input';
+// import { sendEmail } from '../api/sendEmail';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 
@@ -34,7 +35,7 @@ function useWindowSize() {
 
 interface ContactMeFormProps {
   buttonText: string;
-  buttonSelect?: 'primary';
+  buttonSelect?: 'primary' | 'mobile';
 }
 
 export function ContactMeForm({
@@ -45,11 +46,11 @@ export function ContactMeForm({
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const { width, height } = useWindowSize();
 
-  const handleSubmit = async (formData: FormData) => {
-    const result = await sendEmail(formData);
-    setIsOpen(false);
-    if (!result?.error) setIsConfirmationOpen(true);
-  };
+  // const handleSubmit = async (formData: FormData) => {
+  //   const result = await sendEmail(formData);
+  //   setIsOpen(false);
+  //   if (!result?.error) setIsConfirmationOpen(true);
+  // };
 
   return (
     <>
@@ -57,6 +58,8 @@ export function ContactMeForm({
         <DialogTrigger asChild>
           {buttonSelect == 'primary' ? (
             <Button className='hidden sm:flex'>{buttonText}</Button>
+          ) : buttonSelect == 'mobile' ? (
+            <Button className='w-full'>{buttonText}</Button>
           ) : (
             <a className='relative inline-block text-lg group mt-5 w-fit'>
               <span className='relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white'>
@@ -81,7 +84,7 @@ export function ContactMeForm({
               🤝Have an inquiry or need me for hire? Feel free to reach out!
             </DialogDescription>
           </DialogHeader>
-          <form
+          {/* <form
             action={(formData) => {
               handleSubmit(formData);
             }}
@@ -122,7 +125,16 @@ export function ContactMeForm({
                 Send
               </Button>
             </DialogFooter>
-          </form>
+          </form> */}
+          <div className='flex justify-center py-2'>
+            <Image
+              src='/hovercode.png'
+              alt='QR code — scan to get in touch'
+              width={320}
+              height={320}
+              className='rounded-lg'
+            />
+          </div>
         </DialogContent>
       </Dialog>
 

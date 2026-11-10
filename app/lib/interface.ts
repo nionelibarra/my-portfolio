@@ -7,7 +7,7 @@ export interface ProjectsCard {
   link: string;
 }
 
-interface SocialMediaAccount {
+export interface SocialMediaAccount {
   imageUrl: string;
   url: string;
   socialmedianame: string;

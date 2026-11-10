@@ -3,9 +3,7 @@
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetFooter,
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
@@ -53,12 +51,8 @@ export function MobileMenu() {
           >
             📝 Download Resume
           </Button>
+          <ContactMeForm buttonText='👉 Contact Me!' buttonSelect='mobile' />
         </div>
-        <SheetFooter className='mt-5'>
-          <SheetClose asChild>
-            <Button type='button'>Close</Button>
-          </SheetClose>
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

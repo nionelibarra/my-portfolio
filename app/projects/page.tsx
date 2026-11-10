@@ -5,7 +5,7 @@ import { client } from '../lib/sanity';
 async function getData(): Promise<ProjectsCard[]> {
   if (!client) return [];
   // GROQ Query
-  const query = `*[_type == "project"]{
+  const query = `*[_type == "project"] | order(_createdAt desc){
     title,
       _id,
       link,
@@ -26,7 +26,7 @@ export default async function ProjectsPage() {
       <p className='leading-7 text-muted-foreground'>
         Check out what projects I have created or contributed to
       </p>
-      <div className='py-12 grid md:grid-cols-2 gap -4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1'>
+      <div className='py-12 grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 grid-cols-1'>
         {data.map((item) => (
           <a
             href={item.link}
@@ -34,12 +34,13 @@ export default async function ProjectsPage() {
             className='group block'
             target='_blank'
           >
-            <div className='aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl relative'>
+            <div className='aspect-16/12 overflow-hidden rounded-2xl relative'>
               <Image
                 src={item.imageUrl}
                 alt='img-description'
                 fill
-                className='group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
+                sizes='(max-width: 768px) 100vw, 50vw'
+                className='object-contain p-6 group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl'
               ></Image>
             </div>
             <div className='mt-4'>

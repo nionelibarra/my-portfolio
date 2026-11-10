@@ -40,6 +40,7 @@ export const handleDownload = () => {
 
 export function NavBar() {
   const pathname = usePathname();
+  if (pathname.startsWith('/company')) return null;
   return (
     <nav className='max-w-7xl mx-auto px-4 md:px-8 py-5 grid grid-cols-12'>
       <div className='col-span-6 flex md:col-span-3'>
