@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Check, Copy, Loader2, Mail, MessageCircle, Phone, User } from "lucide-react";
+import { ArrowUp, Check, Copy, Loader2, Mail, MessageCircle, Phone, User } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -472,6 +472,16 @@ export function CinematicFooter({
           </div>
         </footer>
       </div>
+
+      {/* Floating scroll-up assist - stacked above Lets Talk */}
+      <MagneticButton
+        as="button"
+        onClick={scrollToTop}
+        aria-label="Scroll back to top"
+        className="footer-glass-pill fixed bottom-[4.75rem] right-5 md:bottom-[6rem] md:right-8 z-40 w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground opacity-80 hover:opacity-100 transition-opacity"
+      >
+        <ArrowUp className="w-5 h-5" />
+      </MagneticButton>
 
       {/* Floating Lets Talk CTA - always reachable, slightly transparent */}
       <MagneticButton

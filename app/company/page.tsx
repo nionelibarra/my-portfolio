@@ -218,15 +218,18 @@ export default async function CompanyPage() {
 
           <div className='mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
             {flowSteps.map((step, index) => (
-              <div key={step.title} className='flex items-center gap-4'>
-                <div className='rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm p-6 flex-1 text-center'>
+              <div
+                key={step.title}
+                className='flex flex-col lg:flex-row items-center gap-4'
+              >
+                <div className='rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm p-6 flex-1 w-full text-center'>
                   <h3 className='text-xl font-bold'>{step.title}</h3>
                   <p className='mt-2 text-sm text-muted-foreground'>
                     {step.description}
                   </p>
                 </div>
                 {index < flowSteps.length - 1 && (
-                  <ArrowRight className='hidden lg:block w-6 h-6 shrink-0 text-primary' />
+                  <ArrowRight className='w-6 h-6 shrink-0 rotate-90 lg:rotate-0 text-primary' />
                 )}
               </div>
             ))}
