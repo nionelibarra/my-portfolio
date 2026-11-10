@@ -2,7 +2,8 @@ import Image from 'next/image';
 import { ProjectsCard } from '../lib/interface';
 import { client } from '../lib/sanity';
 
-async function getData() {
+async function getData(): Promise<ProjectsCard[]> {
+  if (!client) return [];
   // GROQ Query
   const query = `*[_type == "project"]{
     title,

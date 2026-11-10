@@ -1,4 +1,3 @@
-import { revalidatePath } from 'next/cache';
 import Hero from './components/Hero';
 import { SectionTwo } from './components/SectionTwo';
 import { HomePageData } from './lib/interface';
@@ -8,7 +7,8 @@ import { FavoriteProjects } from './components/FavoriteProjects';
 import { Footer } from './components/Footer';
 import CarModelViewer from './components/CarModelViewer';
 
-async function getHomePageData(): Promise<HomePageData> {
+async function getHomePageData(): Promise<HomePageData | null> {
+  if (!client) return null;
   const query = `*[_type == "home"][0]{
     header,
     subheader,
@@ -25,17 +25,24 @@ async function getHomePageData(): Promise<HomePageData> {
     "profilepictwo": profilepictwo.asset->url,
   }`;
   const data = await client.fetch(query, {}, { next: { revalidate: 10 } }); //allows us to revalidate the page every 10 seconds to get the latest data  from sanity studio
-  revalidatePath('/');
   return data;
 }
 
 export default async function Home() {
-  const data: HomePageData = await getHomePageData();
+  const data = await getHomePageData();
   return (
     <div className='max-w-7xl w-full px-4 md:px-8 mx-auto'>
-      <Hero data={data} />
-      <SectionTwo data={data} />
-      <AboutSection data={data} />
+      {data ? (
+        <>
+          <Hero data={data} />
+          <SectionTwo data={data} />
+          <AboutSection data={data} />
+        </>
+      ) : (
+        <p className='pt-20 text-center text-muted-foreground'>
+          Content is not available yet.
+        </p>
+      )}
       {/* <CarModelViewer/> */}
       <FavoriteProjects />
       <Footer />

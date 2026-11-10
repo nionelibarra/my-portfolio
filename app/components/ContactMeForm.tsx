@@ -15,9 +15,22 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { sendEmail } from '../api/sendEmail';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
-import { useWindowSize } from 'react-use';
+
+function useWindowSize() {
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const onResize = () =>
+      setSize({ width: window.innerWidth, height: window.innerHeight });
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  return size;
+}
 
 interface ContactMeFormProps {
   buttonText: string;
@@ -33,9 +46,9 @@ export function ContactMeForm({
   const { width, height } = useWindowSize();
 
   const handleSubmit = async (formData: FormData) => {
-    await sendEmail(formData);
+    const result = await sendEmail(formData);
     setIsOpen(false);
-    setIsConfirmationOpen(true);
+    if (!result?.error) setIsConfirmationOpen(true);
   };
 
   return (

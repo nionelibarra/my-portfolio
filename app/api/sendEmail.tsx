@@ -1,9 +1,10 @@
 'use server';
 
 import { Resend } from 'resend';
-import ContactFormEmail from '../email/contact-form-email';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 const validateString = (value: unknown, maxLength: number) => {
   if (!value || typeof value !== 'string' || value.length > maxLength) {
@@ -13,6 +14,12 @@ const validateString = (value: unknown, maxLength: number) => {
 };
 
 export const sendEmail = async (formData: FormData) => {
+  if (!resend) {
+    return {
+      error: 'Email service is not configured',
+    };
+  }
+
   const senderEmail = formData.get('senderEmail');
   const message = formData.get('message');
   const senderName = formData.get('senderName');
@@ -36,22 +43,11 @@ export const sendEmail = async (formData: FormData) => {
     };
   }
 
-  //   console.log('running sendEmail function');
-  //   console.log(formData.get('senderEmail'));
-  //   console.log(formData.get('senderName'));
-  //   console.log(formData.get('subject'));
-  //   console.log(formData.get('message'));
-
   await resend.emails.send({
     from: 'Portfolio Contact Form <onboarding@resend.dev>',
     to: 'nionelibarra@gmail.com',
     subject: subject as string,
-    reply_to: senderEmail as string,
-    react: (
-      <ContactFormEmail
-        message={message as string}
-        senderEmail={senderEmail as string}
-      />
-    ),
+    replyTo: senderEmail as string,
+    text: `From: ${senderName} <${senderEmail}>\n\n${message}`,
   });
 };

@@ -8,10 +8,10 @@ import { Form } from '../components/Form';
 import prisma from '../lib/db';
 import { Suspense } from 'react';
 import { GuestBookFormLoading, LoadingMessages } from '../components/LoadingState';
-import {unstable_noStore as noStore} from 'next/cache'
+import {connection} from 'next/server'
 
 async function getGuestBookEntry() {
-  noStore(); //this tells nexdtjs to not cache this page and just always get the newest data
+  await connection(); //this tells nexdtjs to not cache this page and just always get the newest data
   const data = await prisma.guestBookEntry.findMany({
     select: {
       User: {
