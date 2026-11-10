@@ -315,7 +315,7 @@ export function CinematicFooter({
 
     // React strict mode compatible GSAP context cleanup
     const ctx = gsap.context(() => {
-      // Background Parallax
+      // Background Parallax - plays once when footer enters view
       gsap.fromTo(
         giantTextRef.current,
         { y: "10vh", scale: 0.8, opacity: 0 },
@@ -324,16 +324,16 @@ export function CinematicFooter({
           scale: 1,
           opacity: 1,
           ease: "power1.out",
+          duration: 1.4,
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top 80%",
-            end: "bottom bottom",
-            scrub: 1,
+            toggleActions: "play none none none",
           },
         }
       );
 
-      // Staggered Content Reveal
+      // Staggered Content Reveal - plays once, stays visible
       gsap.fromTo(
         [headingRef.current, linksRef.current],
         { y: 50, opacity: 0 },
@@ -342,14 +342,16 @@ export function CinematicFooter({
           opacity: 1,
           stagger: 0.15,
           ease: "power3.out",
+          duration: 1,
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top 40%",
-            end: "bottom bottom",
-            scrub: 1,
+            start: "top 60%",
+            toggleActions: "play none none none",
           },
         }
       );
+
+      ScrollTrigger.refresh();
     }, wrapperRef);
 
     return () => ctx.revert();
