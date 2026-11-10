@@ -157,6 +157,10 @@ const STYLES = `
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0px 0px 20px color-mix(in oklch, var(--foreground) 15%, transparent));
+  /* keep composited - fixes clipped text vanishing on browser tab restore */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 `;
 
@@ -354,7 +358,24 @@ export function CinematicFooter({
       ScrollTrigger.refresh();
     }, wrapperRef);
 
-    return () => ctx.revert();
+    // Repaint on tab restore - fixes background-clip:text / backdrop-filter
+    // elements disappearing until the next scroll-forced repaint
+    const handleVisibility = () => {
+      if (document.visibilityState !== 'visible') return;
+      ScrollTrigger.refresh();
+      const el = wrapperRef.current;
+      if (el) {
+        el.style.display = 'none';
+        void el.offsetHeight;
+        el.style.display = '';
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+      ctx.revert();
+    };
   },[]);
 
   const scrollToTop = () => {
@@ -409,18 +430,11 @@ export function CinematicFooter({
 
             {/* Interactive Magnetic Pills Layout */}
             <div ref={linksRef} className="flex flex-col items-center gap-6 w-full">
-              {/* Tagline + single CTA */}
+              {/* Tagline */}
               <p className="text-xl md:text-3xl font-bold tracking-tight text-center max-w-2xl leading-snug">
                 We not only build what you want —{" "}
                 <span className="text-primary">but what you need.</span>
               </p>
-
-              <div className="flex flex-wrap justify-center gap-4 w-full">
-                <MagneticButton as="button" onClick={() => setQrOpen(true)} className="footer-cta-primary w-full sm:w-auto px-12 py-6 rounded-full font-extrabold text-lg md:text-xl flex items-center justify-center gap-3 group">
-                  <MessageCircle className="w-6 h-6 opacity-80 group-hover:opacity-100 transition-opacity" />
-                  Lets Talk
-                </MagneticButton>
-              </div>
 
               {/* Secondary Text Links */}
               <div className="flex flex-wrap justify-center gap-3 md:gap-6 w-full mt-2">
@@ -458,6 +472,17 @@ export function CinematicFooter({
           </div>
         </footer>
       </div>
+
+      {/* Floating Lets Talk CTA - always reachable, slightly transparent */}
+      <MagneticButton
+        as="button"
+        onClick={() => setQrOpen(true)}
+        aria-label="Lets Talk — open contact info"
+        className="footer-cta-primary fixed bottom-5 right-5 md:bottom-8 md:right-8 z-40 px-6 py-3.5 md:px-8 md:py-4 rounded-full font-extrabold text-sm md:text-base flex items-center gap-2.5 opacity-80 hover:opacity-100 transition-opacity group"
+      >
+        <MessageCircle className="w-5 h-5 opacity-80 group-hover:opacity-100 transition-opacity" />
+        Lets Talk
+      </MagneticButton>
 
       {/* Contact QR Modal - themed to match /company (dark) */}
       <Dialog open={qrOpen} onOpenChange={setQrOpen}>
